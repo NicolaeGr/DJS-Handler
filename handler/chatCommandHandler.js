@@ -21,16 +21,13 @@ module.exports = async (err, files, client) => {
       aliases: [],
     };
 
-    if (command.aliases != []) {
-      command.aliases.forEach((alias) => {
-        client.chatCmdsAliases.set(alias, command.name);
-        localTable.aliases.push(alias);
-      });
-    }
-    commandTable.push({
-      name: command.name,
+    command.aliases.forEach((alias) => {
+      client.chatCmdsAliases.set(alias, command.name);
+      localTable.aliases.push(alias);
     });
+
+    commandTable.push(localTable);
   }
-  console.log("Available commands:");
+  console.log("Available chat commands:");
   console.table(commandTable);
 };
